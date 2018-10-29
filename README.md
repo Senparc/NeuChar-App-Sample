@@ -1,3 +1,5 @@
+（代码整理中，预计于10月31日发布，敬请期待）
+
 # www.neuchar.com 应用示例
 
 > NeuChar 官方地址：https://www.neuchar.com<br>
