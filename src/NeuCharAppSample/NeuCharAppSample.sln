@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuCharAppSample", "NeuCharAppSample\NeuCharAppSample.csproj", "{BD25A25C-FB0B-4843-952D-6C809A3D0B7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD25A25C-FB0B-4843-952D-6C809A3D0B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD25A25C-FB0B-4843-952D-6C809A3D0B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD25A25C-FB0B-4843-952D-6C809A3D0B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD25A25C-FB0B-4843-952D-6C809A3D0B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCEE334F-F35A-4A56-A8A8-ED503F461E4A}
+	EndGlobalSection
+EndGlobal
