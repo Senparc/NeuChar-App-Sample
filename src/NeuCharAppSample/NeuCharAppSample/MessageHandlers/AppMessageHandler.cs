@@ -64,6 +64,7 @@ namespace NeuCharAppSample.MessageHandlers
                   {
                       Title = "输入错误！",
                       Description = "请输入正确的文字！",
+                      PicUrl= "https://sdk.weixin.senparc.com/images/v2/logo .png",
                       Url = "https://github.com/Senparc/NeuChar-App-Sample"
                   });
                   return responseMessageNews;
