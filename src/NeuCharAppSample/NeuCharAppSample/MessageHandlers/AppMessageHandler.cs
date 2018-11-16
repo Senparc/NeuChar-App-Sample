@@ -16,6 +16,13 @@ namespace NeuCharAppSample.MessageHandlers
 {
     public class AppMessageHandler : MessageHandler<AppMessageContext>
     {
+        const string NOTICE = @"\r\n\r\n您现在可以发送不同内容进行测试：
+1、输入数字计算平方
+2、输入下列任一关键词返回当前系统时间：time、t、now
+3、上传图片消息返回相同的图片
+
+输入【退出】退出应用状态。";
+
         public AppMessageHandler(Stream inputStream, PostModel postModel, int maxRecordCount = 0, DeveloperInfo developerInfo = null)
             : base(inputStream, postModel, maxRecordCount, developerInfo)
         {
@@ -30,13 +37,7 @@ namespace NeuCharAppSample.MessageHandlers
               .Keyword("APP测试", () =>
               {
                   //进入关键词（必须），内容及消息类型可自定义
-                  responseMessage.Content = @"欢迎使用【APP测试】！
-您现在可以发送不同内容进行测试：
-1、输入数字计算平方
-2、输入下列任一关键词返回当前系统时间：time、t、now
-3、上传图片消息返回相同的图片
-
-输入【退出】退出应用状态。";//也可以创建任意类型
+                  responseMessage.Content = @"欢迎使用【APP测试】！" + NOTICE;//也可以创建任意类型
                   return responseMessage;
               })
               .Keyword("退出", () =>
@@ -64,7 +65,7 @@ namespace NeuCharAppSample.MessageHandlers
                   {
                       Title = "输入错误！",
                       Description = "请输入正确的文字！",
-                      PicUrl= "https://sdk.weixin.senparc.com/images/v2/logo .png",//你没看错，图片文件名就是有一个空格
+                      PicUrl = "https://sdk.weixin.senparc.com/images/v2/logo .png",//你没看错，图片文件名就是有一个空格
                       Url = "https://github.com/Senparc/NeuChar-App-Sample"
                   });
                   return responseMessageNews;
@@ -83,7 +84,7 @@ namespace NeuCharAppSample.MessageHandlers
         public override IResponseMessageBase DefaultResponseMessage(IRequestMessageBase requestMessage)
         {
             var responseMessage = requestMessage.CreateResponseMessage<ResponseMessageText>();
-            responseMessage.Content = "无法识别您的请求，请输入任意类型的文字（或数字）！";
+            responseMessage.Content = "无法识别您的请求！" + NOTICE;
             return responseMessage;
         }
     }
