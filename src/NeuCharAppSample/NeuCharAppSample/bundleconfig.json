@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/css/oauth.min.css",
+    "inputFiles": [
+      "wwwroot/css/oauth.css"
+    ]
+  }
+]
