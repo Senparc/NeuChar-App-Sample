@@ -1,0 +1,78 @@
+﻿@using Senparc.CO2NET
+@using Senparc.CO2NET.Extensions
+@model Senparc.Weixin.MP.AdvancedAPIs.User.UserInfoJson
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neuchar(纽插)OAuth授权 Sample</title>
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- CSS  -->
+    <link href="~/css/oauth.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Content -->
+        <div id="content" class="inner">
+            <div id="content-wrapper">
+                <div id="content-core-wrapper">
+                    <div id="content-core">
+                        <div id="resume" class="content-list">
+                            <div class="photo-frame">
+                                <img src="@Model.headimgurl" alt="头像" />
+                            </div>
+                            <div class="group-container">
+                                <h2>个人信息</h2>
+                                <div class="resume-group">
+                                    <div class="resume-label">昵称</div>
+                                    <div class="resume-info">@Model.nickname</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="resume-group">
+                                    <div class="resume-label">性别</div>
+                                    <div class="resume-info">@((Sex)Model.sex)</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="resume-group">
+                                    <div class="resume-label">地址</div>
+                                    <div class="resume-info">@Model.country @Model.province @Model.city </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="resume-group">
+                                    <div class="resume-label">OpenId</div>
+                                    <div class="resume-info">@Model.openid</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="resume-group">
+                                    <div class="resume-label">是否关注</div>
+                                    <div class="resume-info">@(Model.subscribe == 0 ? "未关注" : "已关注")</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- End Resume -->
+                    </div>
+                </div>
+                <div id="content-footer"></div>
+            </div>
+
+        </div>
+        <!-- End Content -->
+        <!-- Footer -->
+        @*<div id="footer">
+                <div id="footer-inner" class="inner">
+                </div>
+            </div>*@
+        <!-- End Footer -->
+    </div>
+</body>
+</html>
