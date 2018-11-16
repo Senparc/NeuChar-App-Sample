@@ -14,21 +14,21 @@ namespace NeuCharAppSample.Controllers
         /// <summary>
         /// 应用AppCode
         /// </summary>
-        private const string APPCODE = "Jk8GZ13Jqe/62rs7sdWpvQ$$";
+        private const string APPCODE = "";
         /// <summary>
         /// 开发者Key
         /// </summary>
-        private const string APPKEY = "e19f6ac6ed2a435096480dac7914b056";
+        private const string APPKEY = "";
         /// <summary>
         /// 开发者Secret
         /// </summary>
-        private const string APPSECRET = "b88258e84e9e4b4b96402cc43e1eb2be";
+        private const string APPSECRET = "";
 
         /// <summary>
         /// Neuchar App 网页授权域名
         ///查看地址： https://neuchar.senparc.com/Developer/App/OAuth/${id}
         /// </summary>
-        private const string OAUTHDOMAIN = "http://localhost:8773/";
+        private const string OAUTHDOMAIN = "";
 
         public ActionResult Index()
         {
