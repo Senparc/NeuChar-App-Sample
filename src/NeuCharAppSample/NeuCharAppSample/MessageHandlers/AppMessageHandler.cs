@@ -14,9 +14,18 @@ namespace NeuCharAppSample.MessageHandlers
 {
     public class AppMessageHandler : MessageHandler<AppMessageContext>
     {
-        public AppMessageHandler(Stream inputStream, PostModel postModel, int maxRecordCount = 0, DeveloperInfo developerInfo = null) 
+        public AppMessageHandler(Stream inputStream, PostModel postModel, int maxRecordCount = 0, DeveloperInfo developerInfo = null)
             : base(inputStream, postModel, maxRecordCount, developerInfo)
         {
+        }
+
+        public override IResponseMessageBase OnTextRequest(RequestMessageText requestMessage)
+        {
+            var responseMessage = requestMessage.CreateResponseMessage<ResponseMessageText>();
+
+            responseMessage.Content = $"您刚才输入了文字：{requestMessage}";
+
+            return responseMessage;
         }
 
         public override IResponseMessageBase DefaultResponseMessage(IRequestMessageBase requestMessage)
