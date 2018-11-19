@@ -25,8 +25,7 @@ namespace NeuCharAppSample.Controllers
         private const string APPSECRET = "";
 
         /// <summary>
-        /// Neuchar App 网页授权域名
-        ///查看地址： https://neuchar.senparc.com/Developer/App/OAuth/${id}
+        /// 域名
         /// </summary>
         private const string OAUTHDOMAIN = "";
 
