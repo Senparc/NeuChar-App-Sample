@@ -8,7 +8,7 @@
 
         <h3 class="profile-username text-center">@Model.nickname</h3>
 
-        <p class="text-muted text-center">OAuth 获取用户数据</p>
+        <p class="text-muted text-center">登陆Neuchar App管理后台</p>
 
         <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
@@ -21,9 +21,11 @@
                 <b>OpenId</b> <a class="pull-right">@Model.openid</a>
             </li>
             <li class="list-group-item">
-                <b>是否关注</b> <a class="pull-right">@(Model.subscribe == 0 ? "未关注" : "已关注")</a>
+                <b>微信OAuth地址</b> <a class="pull-right"><span>@Url.Action("Index",new{appCode=TempData["AppCode"]})</span></a>
             </li>
         </ul>
+        <a asp-action="Index" asp-route-appCode="@TempData["AppCode"]" class="btn btn-primary btn-block">
+            <b>测试OAuth授权【需要在微信中测试】</b>
+        </a>
     </div>
-    <!-- /.box-body -->
 </div>
