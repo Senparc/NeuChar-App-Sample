@@ -9,6 +9,7 @@ using NeuCharAppSample.Configs;
 using NeuCharAppSample.Controllers;
 using Senparc.CO2NET;
 using Senparc.CO2NET.RegisterServices;
+using Senparc.Weixin;
 using Senparc.Weixin.Entities;
 using Senparc.Weixin.RegisterServices;
 
@@ -75,6 +76,9 @@ namespace NeuCharAppSample
 
             // 启动 CO2NET 全局注册，必须！
             IRegisterService register = RegisterService.Start(env, senparcSetting.Value).UseSenparcGlobal();
+
+            //注册微信
+            register.UseSenparcWeixin(senparcWeixinSetting.Value, senparcSetting.Value);
         }
     }
 }
