@@ -3,8 +3,6 @@
 # www.neuchar.com 应用示例
 
 > NeuChar 官方地址：https://www.neuchar.com<br>
-> 公测阶段地址：htttps://neuchar.senparc.com
-
 
 ## 开发 NeuChar App 需要具备什么能力？
 只要你会开发微信，或对 HTML5 页面开发，就可以轻松对接 NeuChar App
