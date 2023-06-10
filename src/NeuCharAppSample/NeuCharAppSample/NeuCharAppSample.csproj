@@ -10,6 +10,7 @@
 		<!--<PackageReference Include="Microsoft.AspNetCore.App" />-->
 		<!--<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />-->
 		<PackageReference Include="Senparc.CO2NET" Version="2.1.8" />
+		<PackageReference Include="Senparc.NeuChar.App" Version="1.1.6" />
 		<PackageReference Include="Senparc.Weixin.AspNet" Version="0.8.6" />
 		<PackageReference Include="Senparc.Weixin.MP" Version="16.18.12" />
 		<PackageReference Include="Senparc.Weixin.MP.Middleware" Version="0.8.6" />
