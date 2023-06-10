@@ -1,5 +1,6 @@
 ﻿using Senparc.NeuChar.Context;
 using Senparc.NeuChar.Entities;
+using Senparc.Weixin.MP.MessageContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NeuCharAppSample.MessageHandlers
 {
-    public class AppMessageContext : MessageContext<IRequestMessageBase, IResponseMessageBase>
+    public class AppMessageContext : DefaultMpMessageContext
     {
         public AppMessageContext()
         {

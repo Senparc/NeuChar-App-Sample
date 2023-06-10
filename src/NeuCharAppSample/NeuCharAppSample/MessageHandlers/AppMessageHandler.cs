@@ -1,8 +1,8 @@
 ﻿using Senparc.CO2NET.Extensions;
+using Senparc.NeuChar.App.AppStore;
 using Senparc.NeuChar.Entities;
 using Senparc.NeuChar.Entities.Request;
 using Senparc.NeuChar.Helpers;
-using Senparc.Weixin.MP.AppStore;
 using Senparc.Weixin.MP.Entities;
 using Senparc.Weixin.MP.Entities.Request;
 using Senparc.Weixin.MP.MessageHandlers;
@@ -23,8 +23,30 @@ namespace NeuCharAppSample.MessageHandlers
 
 输入【退出】退出应用状态。";
 
-        public AppMessageHandler(Stream inputStream, PostModel postModel, int maxRecordCount = 0, DeveloperInfo developerInfo = null)
-            : base(inputStream, postModel, maxRecordCount, developerInfo)
+        /* 使用 Senparc.Xncf.WeixinManager 的 XNCF 模块进行开发时可直接使用下方的构造函数 */
+        /*
+        private MpAccountDto _mpAccountDto;
+
+        public CustomFullTimeMessageHandler_Jeffrey(MpAccountDto mpAccountDto, Stream inputStream, PostModel postModel, int maxRecordCount = 0, IServiceProvider serviceProvider = null) : base(inputStream, postModel, maxRecordCount, false, null, serviceProvider)
+        {
+            _mpAccountDto = mpAccountDto;
+        }
+        */
+
+        /// <summary>
+        /// 为中间件提供生成当前类的委托
+        /// </summary>
+        public static Func<Stream, PostModel, int, IServiceProvider, AppMessageHandler> GenerateMessageHandler = (stream, postModel, maxRecordCount, serviceProvider)
+                         => new AppMessageHandler(stream, postModel, maxRecordCount, 
+                                  false /* 是否只允许处理加密消息，以提高安全性 */, 
+                                  serviceProvider: serviceProvider);
+
+
+        public AppMessageHandler(Stream inputStream, PostModel postModel, int maxRecordCount = 0,
+            bool onlyAllowEncryptMessage = false, IServiceProvider serviceProvider = null,
+            DeveloperInfo developerInfo = null)
+            : base(inputStream, postModel, maxRecordCount, onlyAllowEncryptMessage, 
+                   developerInfo, serviceProvider)
         {
         }
 
@@ -32,7 +54,7 @@ namespace NeuCharAppSample.MessageHandlers
         {
             var responseMessage = requestMessage.CreateResponseMessage<ResponseMessageText>();
 
-            var requestHandler =
+            var requestHandler = 
               requestMessage.StartHandler()
               .Keyword("APP测试", () =>
               {

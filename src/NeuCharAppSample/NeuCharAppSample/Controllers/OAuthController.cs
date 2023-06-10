@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NeuCharAppSample.Configs;
+using Senparc.NeuChar.App.AppStore;
 using Senparc.Weixin;
 using Senparc.Weixin.MP.AdvancedAPIs.User;
-using Senparc.Weixin.MP.AppStore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,9 +21,12 @@ namespace NeuCharAppSample.Controllers
         private const string OAUTHDOMAIN = "http://localhost:8773/";
 
         private readonly NeucharSetting _neucharSetting;
-        public OAuthController(IOptions<NeucharSetting> neucharSetting)
+        private readonly IServiceProvider _serviceProvider;
+
+        public OAuthController(IOptions<NeucharSetting> neucharSetting, IServiceProvider serviceProvider)
         {
             _neucharSetting = neucharSetting.Value;
+            _serviceProvider = serviceProvider;
         }
 
         public ActionResult Index(string appCode)
@@ -38,11 +41,11 @@ namespace NeuCharAppSample.Controllers
         {
             //获取P2pCode
             var p2pCodeUrl = $"https://neuchar.senparc.com/api/GetPassport?appKey={_neucharSetting.AppKey}&secret={_neucharSetting.AppSecret}";
-            var messageResult = Senparc.CO2NET.HttpUtility.Post.PostGetJson<PassportResult>(p2pCodeUrl, formData: new Dictionary<string, string>(), encoding: Encoding.UTF8);
+            var messageResult = Senparc.CO2NET.HttpUtility.Post.PostGetJson<PassportResult>(_serviceProvider,p2pCodeUrl, formData: new Dictionary<string, string>(), encoding: Encoding.UTF8);
 
             var userinfoUrl =
                 $"https://neuchar.senparc.com/api/GetMember?code={code}&accessToken={messageResult.Data.Token}";
-            var result = Senparc.CO2NET.HttpUtility.Post.PostGetJson<UserInfoJson>(userinfoUrl, null, new Dictionary<string, string>(), Encoding.UTF8);
+            var result = Senparc.CO2NET.HttpUtility.Post.PostGetJson<UserInfoJson>(_serviceProvider,userinfoUrl, null, new Dictionary<string, string>(), Encoding.UTF8);
             return View(result);
         }
 
@@ -59,10 +62,10 @@ namespace NeuCharAppSample.Controllers
             {
                 //获取AccessToken
                 //拉取登录用户信息
-                var passportResult = Senparc.CO2NET.HttpUtility.Post.PostGetJson<PassportResult>($"https://neuchar.senparc.com/api/GetOAuthPassport?clientId={_neucharSetting.ClientId}&secret={_neucharSetting.ClientSecret}", formData: new Dictionary<string, string>(), encoding: Encoding.UTF8);
+                var passportResult = Senparc.CO2NET.HttpUtility.Post.PostGetJson<PassportResult>(_serviceProvider,$"https://neuchar.senparc.com/api/GetOAuthPassport?clientId={_neucharSetting.ClientId}&secret={_neucharSetting.ClientSecret}", formData: new Dictionary<string, string>(), encoding: Encoding.UTF8);
 
                 //获取登陆用户信息
-                var userInfo = Senparc.CO2NET.HttpUtility.Post.PostGetJson<UserInfoJson>($"https://neuchar.senparc.com/api/GetAccount?code={code}&accessToken={passportResult.Data.Token}", null, new Dictionary<string, string>(), Encoding.UTF8);
+                var userInfo = Senparc.CO2NET.HttpUtility.Post.PostGetJson<UserInfoJson>(_serviceProvider,$"https://neuchar.senparc.com/api/GetAccount?code={code}&accessToken={passportResult.Data.Token}", null, new Dictionary<string, string>(), Encoding.UTF8);
                 if (userInfo.errcode != ReturnCode.请求成功)
                 {
                     return Content(userInfo.errmsg);
