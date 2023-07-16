@@ -261,3 +261,6 @@ __pycache__/
 *.pyc
 /src/NeuCharAppSample/NeuCharAppSample/Properties/PublishProfiles/FolderProfile.pubxml
 *.DS_Store
+/src/NeuCharAppSample/.template.config
+/src/NeuCharAppSample.Template.csproj
+/src/NeuCharAppSample.Template.sln
