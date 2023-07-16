@@ -16,7 +16,7 @@ namespace NeuCharAppSample.MessageHandlers
 {
     public class AppMessageHandler : MessageHandler<AppMessageContext>
     {
-        const string NOTICE = @"\r\n\r\n您现在可以发送不同内容进行测试：
+        const string NOTICE = @"您现在可以发送不同内容进行测试：
 1、输入数字计算平方
 2、输入下列任一关键词返回当前系统时间：time、t、now
 3、上传图片消息返回相同的图片
@@ -50,7 +50,7 @@ namespace NeuCharAppSample.MessageHandlers
         {
         }
 
-        public override IResponseMessageBase OnTextRequest(RequestMessageText requestMessage)
+        public override async Task<IResponseMessageBase> OnTextRequestAsync(RequestMessageText requestMessage)
         {
             var responseMessage = requestMessage.CreateResponseMessage<ResponseMessageText>();
 
@@ -59,7 +59,7 @@ namespace NeuCharAppSample.MessageHandlers
               .Keyword("APP测试", () =>
               {
                   //进入关键词（必须），内容及消息类型可自定义
-                  responseMessage.Content = @"欢迎使用【APP测试】！" + NOTICE;//也可以创建任意类型
+                  responseMessage.Content = @"欢迎使用【APP测试】！\r\n\r\n" + NOTICE;//也可以创建任意类型
                   return responseMessage;
               })
               .Keyword("退出", () =>
@@ -71,7 +71,7 @@ namespace NeuCharAppSample.MessageHandlers
               .Regex(@"\d+", () =>
               {
                   //其他任意逻辑
-                  responseMessage.Content = "您输入了数字：{0}\r\n {0} 的平方是：{1}".FormatWith(requestMessage.Content, int.Parse(requestMessage.Content) ^ 2);
+                  responseMessage.Content = "您输入了数字：{0}\r\n {0} 的平方是：{1}".FormatWith(requestMessage.Content, Math.Pow(int.Parse(requestMessage.Content), 2));
                   return responseMessage;
               })
               .Keywords(new[] { "time", "t", "now" }, () =>
@@ -96,7 +96,7 @@ namespace NeuCharAppSample.MessageHandlers
             return requestHandler.GetResponseMessage();
         }
 
-        public override IResponseMessageBase OnImageRequest(RequestMessageImage requestMessage)
+        public override async Task<IResponseMessageBase> OnImageRequestAsync(RequestMessageImage requestMessage)
         {
             var responseMessageImage = requestMessage.CreateResponseMessage<ResponseMessageImage>();
             responseMessageImage.Image.MediaId = requestMessage.MediaId;
@@ -106,7 +106,7 @@ namespace NeuCharAppSample.MessageHandlers
         public override IResponseMessageBase DefaultResponseMessage(IRequestMessageBase requestMessage)
         {
             var responseMessage = requestMessage.CreateResponseMessage<ResponseMessageText>();
-            responseMessage.Content = "无法识别您的请求！" + NOTICE;
+            responseMessage.Content = "无法识别您的请求！\r\n" + NOTICE;
             return responseMessage;
         }
     }
