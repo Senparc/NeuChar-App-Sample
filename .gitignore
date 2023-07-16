@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /src/NeuCharAppSample/NeuCharAppSample/Properties/PublishProfiles/FolderProfile.pubxml
+*.DS_Store
