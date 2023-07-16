@@ -265,3 +265,7 @@ __pycache__/
 /src/NeuCharAppSample.Template.csproj
 /src/NeuCharAppSample.Template.sln
 /src/BuildOutPut
+/BuildOutPut/netstandard2.1
+/src/.template.config
+/NeuCharAppSample.Template.csproj
+/NeuCharAppSample.Template.sln
