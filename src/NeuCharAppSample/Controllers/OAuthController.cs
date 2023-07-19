@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NeuCharAppSample.Configs;
+using Senparc.CO2NET.Extensions;
 using Senparc.NeuChar.App.AppStore;
 using Senparc.Weixin;
 using Senparc.Weixin.MP.AdvancedAPIs.User;
@@ -15,11 +16,6 @@ namespace NeuCharAppSample.Controllers
     /// </summary>
     public class OAuthController : Controller
     {
-        /// <summary>
-        /// 域名
-        /// </summary>
-        private const string OAUTHDOMAIN = "http://localhost:8773/";
-
         private readonly NeucharSetting _neucharSetting;
         private readonly IServiceProvider _serviceProvider;
 
@@ -29,14 +25,23 @@ namespace NeuCharAppSample.Controllers
             _serviceProvider = serviceProvider;
         }
 
+        /// <summary>
+        /// 微信端用户入口页面
+        /// </summary>
+        /// <param name="appCode"></param>
+        /// <returns></returns>
         public ActionResult Index(string appCode)
         {
-            var redirectUrl = $"{OAUTHDOMAIN}/OAuth/Callback";
-            var url = $"{Senparc.NeuChar.App.AppStore.Config.DefaultDomainName}/app/weixinOAuth/Authorize?appCode={appCode}&redirectUrl={redirectUrl}";
+            var redirectUrl = $"{_neucharSetting.OAuthDomain}/OAuth/Callback";
+            var url = $"{Senparc.NeuChar.App.AppStore.Config.DefaultDomainName}/app/weixinOAuth/Authorize?appCode={appCode.UrlDecode()}&redirectUrl={redirectUrl.UrlEncode()}";
             return Redirect(url);
         }
-        //获取Code
 
+        /// <summary>
+        /// 微信端用户验证并登录页面
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public ActionResult Callback(string code)
         {
             //获取P2pCode
