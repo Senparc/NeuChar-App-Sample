@@ -13,6 +13,7 @@ variables:
   solution: '**/Senparc.NeuChar.AppTemplate.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  nugetFeed: 'nuget-jeffrey-full-key'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -37,7 +38,7 @@ steps:
     command: push
     packagesToPush: '**/Senparc.NeuChar.AppTemplate.*.nupkg'
     nuGetFeedType: external
-    publishFeedCredentials: 'nuget-jeffrey-full-key'
+    publishFeedCredentials: '$(nugetFeed)'
   continueOnError: true
   condition: succeededOrFailed()
 
@@ -47,7 +48,7 @@ steps:
     command: push
     packagesToPush: '**/Senparc.NeuChar.AppTemplate.*.snupkg'
     nuGetFeedType: external
-    publishFeedCredentials: 'nuget-jeffrey-full-key'
+    publishFeedCredentials: '$(nugetFeed)'
   continueOnError: true
   condition: succeededOrFailed()
 
