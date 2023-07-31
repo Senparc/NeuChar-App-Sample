@@ -24,6 +24,13 @@ steps:
     feedsToUse: 'config'
     externalFeedCredentials: 'nuget-jeffrey-full-key'
 
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects:  '$(solution)'
+    arguments: '--configuration Release'
 - task: NuGetCommand@2
   displayName: Senparc.NeuChar.AppTemplate
   inputs:
