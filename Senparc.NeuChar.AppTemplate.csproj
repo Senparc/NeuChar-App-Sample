@@ -1,0 +1,78 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<PackageType>Template</PackageType>
+		<PackageVersion>0.1.2</PackageVersion>
+		<PackageId>Senparc.NeuChar.AppTemplate</PackageId>
+		<Title>NeuChar App Template</Title>
+		<Authors>JeffreySu</Authors>
+		<Owners>JeffreySu</Owners>
+		<Description>Template for creating a NeuChar App base project.</Description>
+		<PackageTags>NeuChar;App;template</PackageTags>
+		<IncludeContentInPack>true</IncludeContentInPack>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<ContentTargetFolders>content</ContentTargetFolders>
+		<!-- IncludeBuildOutput=false 时，出现的NU5017错误处理： https://github.com/NuGet/Home/issues/8583 -->
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+		<ProjectUrl>https://github.com/Senparc/NeuChar-App-Sample</ProjectUrl>
+		<PackageProjectUrl>https://github.com/Senparc/NeuChar-App-Sample</PackageProjectUrl>
+		<!--<PackageIcon>icon.jpg</PackageIcon>-->
+		<PackageReleaseNotes>
+			v0.1 创世
+			v0.1.2 优化模板，并压缩内容减少体积
+		</PackageReleaseNotes>
+		<RepositoryUrl>https://github.com/Senparc/NeuChar-App-Sample</RepositoryUrl>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<ProjectUrl> https://github.com/Senparc/NeuChar-App-Sample</ProjectUrl>
+		<Configurations>Release</Configurations>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+	<!--<PropertyGroup Condition=" '$(Configuration)' == 'Release' OR '$(Configuration)'=='TemplateRelease'">
+    <OutputPath Condition=" '$(Configuration)' == 'TemplateRelease'">..\..\..\..\..\NCF\src</OutputPath>
+    <OutputPath Condition=" '$(Configuration)' == 'Release'">..\..\..\BuildOutPut</OutputPath>
+  </PropertyGroup>-->
+	<PropertyGroup>
+		<OutputPath>.\BuildOutPut</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<EmbeddedResource Remove="**\*" />
+
+		<EmbeddedResource Remove="**\SenparcTraceLog\**" />
+		<!--<EmbeddedResource Include="back-end\**\*" Exclude="back-end\**\bin\**;back-end\bin\**;back-end\**\bin\**;back-end\**\obj\**;back-end\obj\**;back-end\.vs\**;back-end\**\SenparcTraceLog\**;back-end\**\ApiDocXml\**;back-end\Senparc.Web\logs\**;back-end\**\*.user;back-end\**\WeChat_OfficialAccount\**;back-end\**\TestResults\**;back-end\**\logs\**;back-end\**\App_Data\QQWry.Dat;" />-->
+
+		<Content Remove="**\*" />
+		<Content Include="**\src\**\*" Exclude="**\App_Data\SenparcTraceLog\*;**\bin\**;**\obj\**;**\.vs\**;**\*.user" />
+
+		<Compile Remove="**\*" />
+
+		<!-- <Compile Remove="back-end\Senparc.Web\App_Data\SenparcTraceLog\**" />
+
+		<Content Remove="back-end\Senparc.Web\App_Data\SenparcTraceLog\**" /> -->
+		<!--<None Remove=".\back-end\App_Data\SenparcTraceLog\**" />-->
+
+	</ItemGroup>
+	<ItemGroup>
+		<!--<None Include="icon.jpg" Pack="true" Visible="false" PackagePath="" />-->
+		<!--<None Remove="icon.jpg" />-->
+
+		<None Remove="**\App_Data\SenparcTraceLog\*" />
+
+		<None Remove="**\bin\**" />
+		<None Remove="**\obj\**" />
+		<None Remove="**\.vs\**" />
+		
+<!--<Content Remove=".template.config\**" />-->
+	</ItemGroup>
+	<ItemGroup>
+		<!--<None Include=".\TemplateBuilder\icon.jpg" Pack="true" PackagePath="/" />-->
+		<!-- <Content Include=".\TemplateBuilder\icon.jpg" Link="icon.jpg" Pack="true" PackagePath="/">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content> -->
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.TemplateEngine.Orchestrator.RunnableProjects" Version="7.0.100" />
+	</ItemGroup>
+
+</Project>
+

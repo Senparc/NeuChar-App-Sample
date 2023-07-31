@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Jeffrey Su",
+  "classifications": [ "NeuCharApp", "NeuCHarTemplate", "Web", "MVC", "API" ],
+  "name": "Custom NeuCharApp Base Project Template",
+  "identity": "NeuChar.App.Template",
+  "groupIdentity": "Custom NeuChar App",
+  "shortName": "NCA",
+  "description": "Template for NeuChar App Base Project Template.",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "preferNameDirectory": true,
+  "symbols": {
+    //"ncfSlnRename": {
+    //  "type": "derived",
+    //  "valueSource": "name",
+    //  "valueTransform": "RenameSlnFile",
+    //  "fileRename": "NeuCharAppSample",
+    //  "description": "rename NeuCharAppSample.sln file."
+    //},
+    //"safeprojectname": {
+    //  "type": "parameter",
+    //  "datatype": "string",
+    //  "defaultValue": "NeuCharAppSample",
+    //  "replaces": "$safeprojectname$"
+    //}
+  },
+  "forms": {
+    "RenameSlnFile": {
+      "identifier": "replace",
+      "pattern": "^NeuCharAppSample.(?=sln)$", // regex to match everything up to and including the final "."
+      "replacement": "" // replace it with empty string
+    }
+  },
+  "sourceName": "NeuCharAppTemplate",
+  "sources": [
+    {
+      "modifiers": [
+
+      ]
+    }
+  ],
+  "exclude": [
+    "**/bin",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules",
+    "**/obj",
+    "**/platforms",
+    "**/SenparcTraceLog",
+    "**/*.DS_Store",
+    "**/*.user",
+    "**/NeuCharAppSample.Template.csproj"
+  ]
+}
