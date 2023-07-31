@@ -1,5 +1,11 @@
 `Sample代码正在不断增加丰富中，敬请关注！`
 
+## 文件说明
+
+`/Senparc.NeuChar.AppTemplate.sln`、`/Senparc.NeuChar.AppTemplate.csproj`、`/src/.template.config` 文件及文件夹都为模板生成文件，非项目文件，仅供生成模板文件使用，开发者请忽略。
+
+`/src/` 文件夹为模板源码，`/src/NeuCharAppSample.sln` 为解决方案文件
+
 # www.neuchar.com 应用示例
 
 > NeuChar 官方地址：https://www.neuchar.com<br>
