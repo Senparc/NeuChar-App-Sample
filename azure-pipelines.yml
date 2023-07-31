@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/NeuCharAppSample.Template.sln'
+  solution: '**/Senparc.NeuChar.AppTemplate.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
