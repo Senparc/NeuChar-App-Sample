@@ -42,15 +42,21 @@ namespace NeuCharAppSample.Controllers
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public ActionResult Callback(string code)
+        public async Task<ActionResult> Callback(string code)
         {
             //获取P2pCode
-            var p2pCodeUrl = $"{Senparc.NeuChar.App.AppStore.Config.DefaultDomainName}/api/GetPassport?appKey={_neucharSetting.AppKey}&secret={_neucharSetting.AppSecret}";
-            var messageResult = Senparc.CO2NET.HttpUtility.Post.PostGetJson<PassportResult>(_serviceProvider,p2pCodeUrl, formData: new Dictionary<string, string>(), encoding: Encoding.UTF8);
+            var p2pCodeUrl = $"{Senparc.NeuChar.App.AppStore.Config.DefaultDomainName}/api/GetPassport";
+
+            var data = new Dictionary<string, string>() {
+                { "appKey",_neucharSetting.AppKey}
+                { "secret",_neucharSetting.AppSecret}
+                };
+
+            var messageResult = await Senparc.CO2NET.HttpUtility.Post.PostGetJsonAsync<PassportResult>(_serviceProvider, p2pCodeUrl, formData: data, encoding: Encoding.UTF8);
 
             var userinfoUrl =
                 $"{Senparc.NeuChar.App.AppStore.Config.DefaultDomainName}/api/GetMember?code={code}&accessToken={messageResult.Data.Token}";
-            var result = Senparc.CO2NET.HttpUtility.Post.PostGetJson<UserInfoJson>(_serviceProvider,userinfoUrl, null, new Dictionary<string, string>(), Encoding.UTF8);
+            var result = await Senparc.CO2NET.HttpUtility.Post.PostGetJsonAsync<UserInfoJson>(_serviceProvider, userinfoUrl, null, new Dictionary<string, string>(), Encoding.UTF8);
             return View(result);
         }
 
@@ -67,10 +73,10 @@ namespace NeuCharAppSample.Controllers
             {
                 //获取AccessToken
                 //拉取登录用户信息
-                var passportResult = Senparc.CO2NET.HttpUtility.Post.PostGetJson<PassportResult>(_serviceProvider,$"{Senparc.NeuChar.App.AppStore.Config.DefaultDomainName}/api/GetOAuthPassport?clientId={_neucharSetting.ClientId}&secret={_neucharSetting.ClientSecret}", formData: new Dictionary<string, string>(), encoding: Encoding.UTF8);
+                var passportResult = Senparc.CO2NET.HttpUtility.Post.PostGetJson<PassportResult>(_serviceProvider, $"{Senparc.NeuChar.App.AppStore.Config.DefaultDomainName}/api/GetOAuthPassport?clientId={_neucharSetting.ClientId}&secret={_neucharSetting.ClientSecret}", formData: new Dictionary<string, string>(), encoding: Encoding.UTF8);
 
                 //获取登陆用户信息
-                var userInfo = Senparc.CO2NET.HttpUtility.Post.PostGetJson<UserInfoJson>(_serviceProvider,$"{Senparc.NeuChar.App.AppStore.Config.DefaultDomainName}/api/GetAccount?code={code}&accessToken={passportResult.Data.Token}", null, new Dictionary<string, string>(), Encoding.UTF8);
+                var userInfo = Senparc.CO2NET.HttpUtility.Post.PostGetJson<UserInfoJson>(_serviceProvider, $"{Senparc.NeuChar.App.AppStore.Config.DefaultDomainName}/api/GetAccount?code={code}&accessToken={passportResult.Data.Token}", null, new Dictionary<string, string>(), Encoding.UTF8);
                 if (userInfo.errcode != ReturnCode.请求成功)
                 {
                     return Content(userInfo.errmsg);
